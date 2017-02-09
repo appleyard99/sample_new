@@ -14,8 +14,20 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth',[
-            'only'=>['edit','update']
+            'only'=>['edit','update','destroy']
         ]);//调用中间件指定验证的方法
+        $this->middleware('guest',['only'=>['create']
+        ]);
+    }
+
+    /**
+     * @return mixed
+     * @detail 显示所有用户信息;
+     */
+    public function index()
+    {
+        $users = User::paginate(30);
+        return view('users.index',compact('users'));
     }
 
     public function create()
@@ -68,6 +80,17 @@ class UsersController extends Controller
         session()->flash('sucess','个人资料更新成功!');
 
         return redirect()->route('users.show',$id);
+    }
+    /**
+     * @detail 删除用户;
+     */
+    public function destroy($id)
+    {
+        $user =  User::findOrFail($id);
+        $this->authorize('destroy',$user);
+        $user->delete();
+        session()->flash('success','成功删除用户!');
+        return back();
     }
 
 }
