@@ -37,6 +37,16 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
     /**
+     * 监听用户创建钱生成账户激活令牌;
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user){
+            $user->activation_token = str_random(30);
+        });
+    }
+    /**
      * generated vatar
      */
     public function gravatar($size=100)
@@ -48,6 +58,8 @@ class User extends Model implements AuthenticatableContract,
     {
         $this->attributes['password']=bcrypt($password);
     }
+
+
 
 
 
