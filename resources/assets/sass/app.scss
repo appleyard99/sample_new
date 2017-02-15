@@ -14,6 +14,9 @@ textarea {
 .jumbotron {
   text-align:center;
 }
+.alert-status {
+  @extend .alert-info;
+}
 /*typograpy*/
 h1,h2,h3,h4,h5,h6 {
   line-height:1;
@@ -160,6 +163,7 @@ input{
   position:relative;
   right:0;
 }
+
 
 
 

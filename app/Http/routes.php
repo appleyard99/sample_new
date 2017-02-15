@@ -27,4 +27,10 @@ post('login','SessionsController@store')->name('login');
 delete('logout','SessionsController@destory')->name('logout');
 get('signup/confirm/{token}','UsersController@confirmEmail')->name('confirm_email');
 
+//密码重置部分;
+get('password/email','Auth\PasswordController@getEmail')->name('password.reset');
+post('password/email','Auth\PasswordController@postEmail')->name('password.reset');
+get('password/reset/{token}','Auth\PasswordController@getReset')->name('password.edit');
+post('password/reset','Auth\PasswordController@postReset')->name('password.update');
+
 
