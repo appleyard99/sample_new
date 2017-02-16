@@ -32,5 +32,7 @@ get('password/email','Auth\PasswordController@getEmail')->name('password.reset')
 post('password/email','Auth\PasswordController@postEmail')->name('password.reset');
 get('password/reset/{token}','Auth\PasswordController@getReset')->name('password.edit');
 post('password/reset','Auth\PasswordController@postReset')->name('password.update');
+//微博部分
+resource('statuses','StatusesController',['only'=>['store','destroy']]);
 
 

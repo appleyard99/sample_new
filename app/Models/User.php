@@ -59,9 +59,21 @@ class User extends Model implements AuthenticatableContract,
         $this->attributes['password']=bcrypt($password);
     }
 
+    /**
+     * @detail 用户微博
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+    /**
+     * @detail 微博动态
+     *
+     */
+    public function feed(){
 
-
-
-
+        return $this->statuses()->orderBy('created_at','desc');
+    }
 
 }
