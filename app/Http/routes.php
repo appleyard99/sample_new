@@ -34,5 +34,9 @@ get('password/reset/{token}','Auth\PasswordController@getReset')->name('password
 post('password/reset','Auth\PasswordController@postReset')->name('password.update');
 //微博部分
 resource('statuses','StatusesController',['only'=>['store','destroy']]);
-
-
+//微博关注和被关注部分
+get('/users/{id}/followings','UsersController@followings')->name('users.followings');
+get('/users/{id}/followers','UsersController@followers')->name('users.followers');
+//关注表单;
+post('/users/followers/{id}','FollowersController@store')->name('followers.store');
+delete('/users/followers/{id}','FollowersController@destroy')->name('followers.destroy');
